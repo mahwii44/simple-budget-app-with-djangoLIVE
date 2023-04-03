@@ -1,23 +1,12 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Transactions</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for transaction in transactions %}
-                <tr>
-                    <td>{{ transaction.name }}</td>
-                    <td>{{ transaction.amount }}</td>
-                    <td>{{ transaction.date }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1>{% if request.resolver_match.url_name == 'transaction_create' %}New Transaction{% else %}Edit Transaction{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">
+            {% if request.resolver_match.url_name == 'transaction_create' %}Create{% else %}Save{% endif %}</button>
+        <a href="{% url 'transactions' %}" class="btn btn-secondary">Cancel</a>
+    </form>
 {% endblock %}
