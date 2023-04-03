@@ -3,7 +3,7 @@ from .models import Transaction
 
 
 # Create your views here.
-def transaction_list(request):
+def index(request):
     transactions = Transaction.objects.all()
     return render(request, 'index.html', {'transactions': transactions})
 
