@@ -8,6 +8,7 @@ from .models import Transaction
 class TransactionListView(ListView):
     model = Transaction
     template_name = 'index.html'
+    context_object_name = 'transactions'
 
 class TransactionCreateView(CreateView):
     model = Transaction
