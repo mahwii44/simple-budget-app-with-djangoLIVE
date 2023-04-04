@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% if request.resolver_match.url_name == 'transaction_create' %}New Transaction{% else %}Edit Transaction{% endif %}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">
-            {% if request.resolver_match.url_name == 'transaction_create' %}Create{% else %}Save{% endif %}</button>
-        <a href="{% url 'transactions' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+  <h1>Transactions</h1>
+  <p><a href="{% url 'transaction_create' %}">Create new transaction</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in object_list %}
+        <tr>
+          <td>{{ transaction.date }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>{{ transaction.amount }}</td>
+          <td><a href="{% url 'transaction_update' transaction.pk %}">Edit</a></td>
+          <td><a href="{% url 'transaction_delete' transaction.pk %}">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

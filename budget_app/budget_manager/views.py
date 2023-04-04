@@ -1,6 +1,9 @@
+from django.shortcuts import render
+from .models import Transaction
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Transaction
+
 
 class TransactionListView(ListView):
     model = Transaction
