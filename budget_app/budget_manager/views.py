@@ -7,21 +7,21 @@ from .models import Transaction
 
 class TransactionListView(ListView):
     model = Transaction
-    template_name = 'budget/transaction_list.html'
+    template_name = 'index.html'
 
 class TransactionCreateView(CreateView):
     model = Transaction
-    template_name = 'budget/transaction_form.html'
+    template_name = 'newbudget.html'
     fields = ['date', 'description', 'amount']
     success_url = reverse_lazy('transactions')
 
 class TransactionUpdateView(UpdateView):
     model = Transaction
-    template_name = 'budget/transaction_form.html'
+    template_name = 'index.html'
     fields = ['date', 'description', 'amount']
     success_url = reverse_lazy('transactions')
 
 class TransactionDeleteView(DeleteView):
     model = Transaction
-    template_name = 'budget/transaction_confirm_delete.html'
+    template_name = 'delete.html'
     success_url = reverse_lazy('transactions')
