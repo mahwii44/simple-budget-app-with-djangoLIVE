@@ -1,15 +1,10 @@
 from django.urls import path
 from . import views
-from .views import (
-    TransactionListView,
-    TransactionCreateView,
-    TransactionUpdateView,
-    TransactionDeleteView,
-)
 
 urlpatterns = [
-    path('', TransactionListView.as_view(), name='transactions'),
-    path('new/', TransactionCreateView.as_view(), name='transaction_create'),
-    path('<int:pk>/update/', TransactionUpdateView.as_view(), name='transaction_update'),
-    path('<int:pk>/delete/', TransactionDeleteView.as_view(), name='transaction_delete'),
+    path('', views.transaction_list, name='transaction_list'),
+    path('new/', views.transaction_create, name='transaction_create'),
+    path('<int:pk>/update/', views.transaction_update, name='transaction_update'),
+    path('<int:pk>/delete/', views.transaction_delete, name='transaction_delete'),
 ]
+
