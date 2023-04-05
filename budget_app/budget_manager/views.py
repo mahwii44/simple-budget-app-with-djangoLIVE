@@ -6,23 +6,23 @@ from .models import Transaction
 
 
 class TransactionListView(ListView):
-    model = Transaction
-    template_name = 'index.html'
-    context_object_name = 'transactions'
+     model = Transaction
+     template_name = 'index.html'
+     context_object_name = 'transaction'
 
 class TransactionCreateView(CreateView):
     model = Transaction
     template_name = 'newbudget.html'
     fields = ['date', 'description', 'amount']
-    success_url = reverse_lazy('transactions')
+    success_url = reverse_lazy('transaction')
 
 class TransactionUpdateView(UpdateView):
     model = Transaction
     template_name = 'index.html'
     fields = ['date', 'description', 'amount']
-    success_url = reverse_lazy('transactions')
+    success_url = reverse_lazy('transaction')
 
 class TransactionDeleteView(DeleteView):
     model = Transaction
     template_name = 'delete.html'
-    success_url = reverse_lazy('transactions')
+    success_url = reverse_lazy('transaction')
