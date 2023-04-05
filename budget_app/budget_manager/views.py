@@ -3,16 +3,21 @@ from .models import Transaction
 from .forms import TransactionForm
 
 
-class TransactionListView(ListView):
-     model = Transaction
-     template_name = 'index.html'
-     context_object_name = 'transaction'
+def transaction_list(request):
+    transactions = Transaction.objects.all()
+    return render(request, 'index.html', {'transactions': transactions})
 
-class TransactionCreateView(CreateView):
-    model = Transaction
-    template_name = 'newbudget.html'
-    fields = ['date', 'description', 'amount']
-    success_url = reverse_lazy('transaction')
+def transaction_create(request):
+    if request.method == 'POST':
+        form = TransactionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('transaction_list')
+    else:
+        form = TransactionForm()
+    return render(request, 'newbudget.html', {'form': form})
+
+
 
 class TransactionUpdateView(UpdateView):
     model = Transaction
