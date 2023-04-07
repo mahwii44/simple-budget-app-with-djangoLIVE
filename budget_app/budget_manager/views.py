@@ -43,7 +43,7 @@ def transaction_delete(request, pk):
     if request.method == 'POST':
         transaction.delete()
         messages.success(request, 'Transaction deleted successfully.')
-        return redirect('transactions')
+        return redirect('transaction_list')
 
     context = {
         'transaction': transaction,
